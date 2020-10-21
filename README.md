@@ -8,6 +8,8 @@ note:
   modified: 2020-10-21T01:56:49.429Z
 ---
 
+使用[交叉笔记](https://crossnote.app/)完成
+
 # 重新学习数据结构与算法
 <!-- @crossnote.comment "id":"b5344b1f-757b-4eba-9c73-090693eed368" -->  
 
