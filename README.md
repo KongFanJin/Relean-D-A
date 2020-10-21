@@ -1,13 +1,15 @@
 ---
-tags: []
-created: 2020-10-21T01:45:56.094Z
-modified: 2020-10-21T01:56:49.429Z
----
-
---- 
 notebook: 
   owner: KongFanJin
   name: 重新学习数据结构与算法
+note:
+  tags: []
+  created: 2020-10-21T01:45:56.094Z
+  modified: 2020-10-21T01:56:49.429Z
+---
+
+--- 
+
 ---
 
 # 重新学习数据结构与算法
