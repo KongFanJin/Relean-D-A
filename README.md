@@ -1,11 +1,10 @@
 ---
-notebook: 
-  owner: KongFanJin
-  name: 重新学习数据结构与算法
-note:
-  tags: []
-  created: 2020-10-21T01:45:56.094Z
-  modified: 2020-10-21T01:56:49.429Z
+notebook:
+    owner: KongFanJin
+    name: 重新学习数据结构与算法
+tags: []
+created: 2020-10-21T02:05:07.315Z
+modified: 2020-10-21T02:05:07.315Z
 ---
 
 使用[交叉笔记](https://crossnote.app/?repo=https%3A%2F%2Fgithub.com%2FKongFanJin%2FRelean-D-A.git&branch=main&filePath=README.md)完成
