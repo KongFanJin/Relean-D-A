@@ -6,9 +6,9 @@ tags:
     - 剑指Offer第2版/59
     - LeetCode/239
 created: 2020-10-21T20:22:15.495Z
-modified: 2020-10-21T20:49:42.463Z
+modified: 2020-10-21T20:49:42.463Z题目[原指239](https://leetcode-cn.com/problems/sliding-window-maximum/
 ---
-[239](https://leetcode-cn.com/problems/sliding-window-maximum/)
+[题目原址-239](https://leetcode-cn.com/problems/sliding-window-maximum/)
 
 参考
 
@@ -156,8 +156,6 @@ public:
     }
 };
 ```
-
-
 
 leetcode测试数据集有的超时
 
