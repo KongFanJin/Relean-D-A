@@ -1,10 +1,11 @@
 ---
 tags:
-    - 队列/双端队列
-	- 滑动窗口/固定窗口
-    - 困难
     - 剑指Offer第2版/59
     - LeetCode/239
+    - Deque
+	- BST
+	- 滑动窗口
+    - 困难
 created: 2020-10-21T20:22:15.495Z
 modified: 2020-10-21T20:49:42.463Z题目[原指239](https://leetcode-cn.com/problems/sliding-window-maximum/
 ---
@@ -12,9 +13,11 @@ modified: 2020-10-21T20:49:42.463Z题目[原指239](https://leetcode-cn.com/prob
 
 参考
 
-- [小美图解剑指Offer59题](https://www.bilibili.com/video/BV1YV411o7Gr/)
-- [花花酱 LeetCode 239](https://www.bilibili.com/video/BV1WW411C763)
-- [暴力法](https://leetcode-cn.com/problems/sliding-window-maximum/solution/c-bao-li-fa-shuang-duan-dui-lie-dp-by-yizhe-shi/)
+- [小美图解剑指Offer59题 [Java]](https://www.bilibili.com/video/BV1YV411o7Gr/)
+- 花花酱 LeetCode 239 [C++]
+  - [video](https://www.bilibili.com/video/BV1WW411C763)
+  - [code](https://zxi.mytechroad.com/blog/heap/leetcode-239-sliding-window-maximum/)
+- [暴力法 [C++]](https://leetcode-cn.com/problems/sliding-window-maximum/solution/c-bao-li-fa-shuang-duan-dui-lie-dp-by-yizhe-shi/)
 
 # 题目描述
 
@@ -137,6 +140,7 @@ SUMMARY: UndefinedBehaviorSanitizer: undefined-behavior /usr/bin/../lib/gcc/x86_
 ### 正确
 
 ```C++
+// Philos
 class Solution
 {
 public:
@@ -159,9 +163,28 @@ public:
 
 leetcode测试数据集有的超时
 
+```c++
+// 花花酱
+class Solution {
+public:
+  vector<int> maxSlidingWindow(vector<int>& nums, int k) {    
+    vector<int> ans;
+    for (int i = k - 1; i < nums.size(); ++i) {
+      ans.push_back(*max_element(nums.begin() + i - k + 1, nums.begin() + i + 1));
+    }
+    return ans;
+  }
+};
+```
+
+[max_element](https://en.cppreference.com/w/cpp/algorithm/max_element)
+
 ## 时间/空间复杂度分析
 
 二级循环:$T(n)=(n-k+1)k$
 
 没有辅助空间
 
+# BST/multiset
+
+# Monotonic Queue/deque
