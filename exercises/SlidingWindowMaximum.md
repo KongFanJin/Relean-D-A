@@ -21,6 +21,7 @@ modified: 2020-10-21T20:49:42.463Z
   - [video](https://www.bilibili.com/video/BV1WW411C763)
   - [code](https://zxi.mytechroad.com/blog/heap/leetcode-239-sliding-window-maximum/)
 - [暴力法 [C++]](https://leetcode-cn.com/problems/sliding-window-maximum/solution/c-bao-li-fa-shuang-duan-dui-lie-dp-by-yizhe-shi/)
+- [单调队列解题详解](https://leetcode-cn.com/problems/sliding-window-maximum/solution/dan-diao-dui-lie-by-labuladong/)
 
 # 题目描述
 
@@ -61,13 +62,15 @@ modified: 2020-10-21T20:49:42.463Z
 
 输出的数组大小为$nums.lengths-k+1$
 
-# Brute Force
+# 参考方法
+
+## Brute Force
 
 扫描每个滑动窗口的所有数字并找出其中的最大值.
 
-## 代码
+### 代码
 
-### 粗略代码
+#### 粗略代码
 
 > 不涉及代码的格式等细节
 
@@ -97,7 +100,7 @@ vector<int> maxSlidingWindow(vector<int>& nums, int k) {
 
 
 
-### 改版1
+#### 改版1
 
 ```c++
 class Solution
@@ -140,7 +143,7 @@ SUMMARY: UndefinedBehaviorSanitizer: undefined-behavior /usr/bin/../lib/gcc/x86_
 
 **错误分析**
 
-### 正确
+#### 正确
 
 ```C++
 // Philos
@@ -184,13 +187,13 @@ public:
 
 [max_element](https://en.cppreference.com/w/cpp/algorithm/max_element)
 
-## 时间/空间复杂度分析
+### 时间/空间复杂度分析
 
 二级循环:$T(n)=(n-k+1)k$
 
 没有辅助空间
 
-# BST/Multiset(等复习完,再看)
+## BST/Multiset(等复习完,再看)
 
 ```C++
 // Author: Huahua
@@ -220,9 +223,9 @@ public:
 
 
 
-# Monotonic Queue/Deque
+## Monotonic Queue/Deque
 
-
+### Huahua
 
 Monotonic Queue:左大右小的双端队列
 
@@ -250,7 +253,7 @@ public:
 
 > 注:队尾元素可能后面窗口的最大值
 
-## 代码
+#### 代码
 
 ```C++
 // Author: Huahua
@@ -259,6 +262,7 @@ public:
     void push(int e){
         while (!data_.empty() && e > data_.back()) // 出队比e小的元素,然后入队
             data_.pop_back();
+        
         data_.push_back(e);
     }
 
@@ -292,11 +296,11 @@ public:
 };
 ```
 
-## 时间/空间复杂度分析
+#### 时间/空间复杂度分析
 
 时间:
 
-## 优化(待分析)
+#### 优化(待分析)
 
 ```C++
 // Author: Huahua
@@ -325,3 +329,5 @@ public:
 ```
 
 > LeetCode测试时间没有明显减少
+
+### labuladong
