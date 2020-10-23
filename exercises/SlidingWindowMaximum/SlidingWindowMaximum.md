@@ -1,16 +1,15 @@
 ---
-
 tags:
     - 剑指Offer第2版/59
-    - LeetCode/239
-    - Queue/Deque
-	- BST
-	- Multiset
-	- slidingwindow
-    - hard
     - 未解决
-created: 2020-10-21T20:22:15.495Z
-modified: 2020-10-21T20:49:42.463Z
+    - BST
+    - hard
+    - LeetCode/239
+    - Multiset
+    - Queue/Deque
+    - slidingwindow
+created: 2020-10-23T08:15:44.232Z
+modified: 2020-10-23T08:17:50.735Z
 ---
 [题目原址-239](https://leetcode-cn.com/problems/sliding-window-maximum/)
 
