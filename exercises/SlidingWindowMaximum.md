@@ -1,13 +1,16 @@
 ---
+
 tags:
     - 剑指Offer第2版/59
     - LeetCode/239
-    - Deque
+    - Queue/Deque
 	- BST
+	- Multiset
 	- 滑动窗口
     - 困难
+    - 未解决
 created: 2020-10-21T20:22:15.495Z
-modified: 2020-10-21T20:49:42.463Z题目[原指239](https://leetcode-cn.com/problems/sliding-window-maximum/
+modified: 2020-10-21T20:49:42.463Z
 ---
 [题目原址-239](https://leetcode-cn.com/problems/sliding-window-maximum/)
 
@@ -90,7 +93,7 @@ vector<int> maxSlidingWindow(vector<int>& nums, int k) {
 }
 ```
 
-错误分析
+**错误分析**
 
 
 
@@ -128,14 +131,14 @@ public:
 };
 ```
 
-错误提示
+**错误提示**
 
 ```
 Line 1034: Char 9: runtime error: reference binding to null pointer of type 'int' (stl_vector.h)
 SUMMARY: UndefinedBehaviorSanitizer: undefined-behavior /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/bits/stl_vector.h:1043:9
 ```
 
-错误分析
+**错误分析**
 
 ### 正确
 
@@ -161,7 +164,7 @@ public:
 };
 ```
 
-leetcode测试数据集有的超时
+leetcode测试超时
 
 ```c++
 // 花花酱
@@ -169,9 +172,11 @@ class Solution {
 public:
   vector<int> maxSlidingWindow(vector<int>& nums, int k) {    
     vector<int> ans;
-    for (int i = k - 1; i < nums.size(); ++i) {
-      ans.push_back(*max_element(nums.begin() + i - k + 1, nums.begin() + i + 1));
+    
+    for (int i = 0; i != (nums.size()-k)+1; ++i) { // n-k+1
+      ans.push_back(*max_element(nums.begin() + i, nums.begin() + i + k));
     }
+      
     return ans;
   }
 };
@@ -185,6 +190,138 @@ public:
 
 没有辅助空间
 
-# BST/multiset
+# BST/Multiset(等复习完,再看)
 
-# Monotonic Queue/deque
+```C++
+// Author: Huahua
+class Solution
+{
+public:
+    vector<int> maxSlidingWindow(vector<int> &nums, int k)
+    {
+        vector<int> ans;
+        
+        if (nums.empty())
+            return ans;
+        
+        multiset<int> window(nums.begin(), nums.begin() + k - 1);
+        for (int i = k - 1; i < nums.size(); ++i)
+        {
+            window.insert(nums[i]);
+            ans.push_back(*window.rbegin());
+            if (i - k + 1 >= 0)
+                window.erase(window.equal_range(nums[i - k + 1]).first);
+        }
+        
+        return ans;
+    }
+};
+```
+
+
+
+# Monotonic Queue/Deque
+
+
+
+Monotonic Queue:左大右小的双端队列
+
+```C++
+class MonotonicQueue{
+public:
+    void push(int e); // push an element on the queue,then will pop all elements smaller than e
+    void pop(); // pop the first(max) element
+    int max() const; // get the max element
+}
+```
+
+```
+  滑动窗口的位置               Monotonic Queue		  最大值
+---------------               --------------- 		-----
+[1]  3  -1 -3  5  3  6  7     [1]					-	  push 1,1即为max  
+[1  3]  -1 -3  5  3  6  7     [3]					-	  push 3, 3 > 1, 1出队
+[1  3  -1] -3  5  3  6  7     [3,-1]				3     push -1, -1 < 3, -1入队; 3个元素了, 最大值3
+ 1 [3  -1  -3] 5  3  6  7     [3,-1,-3]				3     窗口移位1, push -3, -3 < -1, -3入队; 最大值3
+ 1  3 [-1  -3  5] 3  6  7     [5]					5     窗口移位1, push 5, 5 > -1; -1,-3出队; 最大值5
+ 1  3  -1 [-3  5  3] 6  7     [5,3]                 5     窗口移位1, push 3, 3 < 5, 3入队; 最大值5
+ 1  3  -1  -3 [5  3  6] 7     [6]                   6     窗口移位1, push 6, 6 > 5, 5出队; 最大值5
+ 1  3  -1  -3  5 [3  6  7]    [7]                   7     窗口移位1, push 7, 7 > 6, 6出队; 最大值7
+```
+
+> 注:队尾元素可能后面窗口的最大值
+
+## 代码
+
+```C++
+// Author: Huahua
+class MonotonicQueue{
+public:
+    void push(int e){
+        while (!data_.empty() && e > data_.back()) // 出队比e小的元素,然后入队
+            data_.pop_back();
+        data_.push_back(e);
+    }
+
+    void pop(){ // pop最大的元素
+        data_.pop_front();
+    }
+
+    int max() const { return data_.front(); } // get最大的元素
+
+private:
+    deque<int> data_; // 支持随机访问的双端队列
+};
+
+class Solution{
+public:
+    vector<int> maxSlidingWindow(vector<int> &nums, int k){
+        MonotonicQueue q;
+        vector<int> ans;
+
+        for (int i = 0; i < nums.size(); ++i){
+            q.push(nums[i]);
+            if (i - k + 1 >= 0){ // 有足够的元素(k个)了
+                ans.push_back(q.max()); // 取最大值加入ans中
+                
+                if (nums[i - k + 1] == q.max()) // 如果当前元素(...[...]i...)与窗口的当前最大元素相等时 (与视频理解有点不一样)
+                    q.pop();
+            }
+        }
+        return ans;
+    }
+};
+```
+
+## 时间/空间复杂度分析
+
+时间:
+
+## 优化(待分析)
+
+```C++
+// Author: Huahua
+class Solution {
+public:
+    vector<int> maxSlidingWindow(vector<int>& nums, int k) {
+		deque<int> index;
+        vector<int> ans;
+        
+        for(int i = 0; i != nums.size(); ++i){
+            for(;!index.empty()  && nums[i] >= nums [index.back()];)
+                index.pop_back();
+            
+            index.push_back(i);
+            
+            if(i - k + 1 >= 0)
+            	ans.push_back(nums[index.front()]);
+            
+            if(i - k + 1 >= index.front())
+                index.pop_front();
+        }
+        
+        return ans;
+    }
+};
+```
+
+> LeetCode测试时间没有明显减少
