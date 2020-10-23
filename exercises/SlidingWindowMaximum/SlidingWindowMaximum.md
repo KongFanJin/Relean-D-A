@@ -1,8 +1,8 @@
 ---
 
 tags:
-    - 出处/剑指Offer第2版/59
-    - 出处/LeetCode/239
+    - 剑指Offer第2版/59
+    - LeetCode/239
     - Queue/Deque
 	- BST
 	- Multiset
