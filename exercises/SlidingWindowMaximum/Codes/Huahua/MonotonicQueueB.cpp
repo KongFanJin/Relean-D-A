@@ -13,14 +13,14 @@ class Solution {
             while (!index.empty() && nums[i] >= nums[index.back()])
                 index.pop_back();
             
-            // 入队i
+            // 入队下标i
             index.push_back(i);
 
             // 有足够的元素(k个)了
-            // 获得index.front()最大元素,加入ans中
+            // 获得index.front()最大元素下标,加入ans中
             if (i - k + 1 >= 0) ans.push_back(nums[index.front()]);
 
-            // 窗口元素个数超过index.front()
+            // 窗口元素个数超过index.front(); i - k + 1 的含义待整理
             if (i - k + 1 >= index.front()) index.pop_front();
         }
         return ans;
