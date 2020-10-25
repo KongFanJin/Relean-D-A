@@ -1,15 +1,13 @@
 ---
 tags:
     - 剑指Offer第2版/59
-    - 未解决
-    - BST
     - hard
     - LeetCode/239
+    - MonotonicQueue
     - Multiset
-    - Queue/Deque
-    - slidingwindow
+    - SlidingWindow
 created: 2020-10-23T08:15:44.232Z
-modified: 2020-10-25T11:32:25.819Z
+modified: 2020-10-25T22:28:33.755Z
 ---
 [题目原址-239](https://leetcode-cn.com/problems/sliding-window-maximum/)
 
