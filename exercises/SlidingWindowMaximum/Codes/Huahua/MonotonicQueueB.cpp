@@ -1,6 +1,4 @@
 // Author: Huahua
-// Running time: 65 ms
-// 没有完全理解
 class Solution {
    public:
     vector<int> maxSlidingWindow(vector<int> &nums, int k) {
