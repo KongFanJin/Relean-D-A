@@ -15,9 +15,8 @@ modified: 2020-10-23T08:17:50.735Z
 
 参考
 
-- 花花酱 LeetCode 239 [C++]
-  - [video](https://www.bilibili.com/video/BV1WW411C763)
-  - [code](https://zxi.mytechroad.com/blog/heap/leetcode-239-sliding-window-maximum/)
+- [花花酱 LeetCode 239 [C++]](https://www.bilibili.com/video/BV1WW411C763)
+- [Huifeng Guan](https://www.youtube.com/watch?v=b1rqOQ5p6EA)
 
 # 题目描述
 
@@ -133,6 +132,12 @@ SUMMARY: UndefinedBehaviorSanitizer: undefined-behavior /usr/bin/../lib/gcc/x86_
 # 代码参考
 
 [跳转](Codes)
+
+- [BruteForce.cpp](Codes\Huahua\BruteForce.cpp)
+- [BSTMultiset.cpp](Codes\Huahua\BSTMultiset.cpp)
+- [MonotonicQueueA.cpp](Codes\Huahua\MonotonicQueueA.cpp)
+- [MonotonicQueueB.cpp](Codes\Huahua\MonotonicQueueB.cpp)
+- [MonotonicQueueC.cpp](Codes\Huahua\MonotonicQueueC.cpp)
 
 # 总结(待整理)
 
