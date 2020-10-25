@@ -9,7 +9,7 @@ tags:
     - Queue/Deque
     - slidingwindow
 created: 2020-10-23T08:15:44.232Z
-modified: 2020-10-23T08:17:50.735Z
+modified: 2020-10-25T11:32:25.819Z
 ---
 [题目原址-239](https://leetcode-cn.com/problems/sliding-window-maximum/)
 
@@ -139,6 +139,8 @@ SUMMARY: UndefinedBehaviorSanitizer: undefined-behavior /usr/bin/../lib/gcc/x86_
 - [MonotonicQueueB.cpp](Codes\Huahua\MonotonicQueueB.cpp)
 - [MonotonicQueueC.cpp](Codes\Huahua\MonotonicQueueC.cpp)
 
+详解见代码注释
+> 这几种解题方法基本理解,还需默写几次
 # 总结(待整理)
 
 - 熟悉已有的工具(库)的性质
