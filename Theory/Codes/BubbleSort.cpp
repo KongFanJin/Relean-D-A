@@ -6,8 +6,10 @@ using namespace std;
 class Solution {
 public:
     vector<int> sortArray(vector<int>& nums){
-        for(auto i = 1; i != nums.size() - 1; i ++)
-            for(auto j = 0; j != nums.size() - i; j++)
+        // 最后一趟扫描元素就一个而且最小,不用比较,故需要n-1趟
+        for(auto i = 0; i != nums.size() - 1; i ++)
+            // 每趟扫描将最大元素交换到a[n-1-i]的位置
+            for(auto j = 0; j != (nums.size() - 1) - i; j++)
                 if(nums[j] > nums[j+1]) 
                     swap(nums[j],nums[j+1]);
         
@@ -19,83 +21,25 @@ public:
 class Solution1 {
 public:
     vector<int> sortArray(vector<int>& nums){
-        for(auto i = 0; i != nums.size() - 1; i ++)
-            for(auto j = 0; j != nums.size() - i - 1; j++)
-                if(nums[j] > nums[j+1]) 
-                    swap(nums[j],nums[j+1]);
-        
-        return nums;
-    }
-};
-
-// 有问题 flag跳出的位置
-class Solution2 {
-public:
-    vector<int> sortArray(vector<int>& nums){
+        // 发生交换设为true,未发生交换说明是不递减序列,设为false跳出比较
         bool flag = true;
-        for(auto i = 0; i != nums.size() - 1 && flag; i ++)
-            for(auto j = 0; j != nums.size() - i - 1; j++)
+        for(auto i = 0; flag && i != nums.size() - 1; i ++){
+            flag = false; 
+            for(auto j = 0; j != (nums.size() - 1) - i; j++)
                 if(nums[j] > nums[j+1]) {
                     swap(nums[j],nums[j+1]);
-                    flag = false;
+                    flag = true;
                 }
-        
-        return nums;
-    }
-};
-
-class Solution3 {
-public:
-    vector<int> sortArray(vector<int>& nums){
-        for(auto i = nums.size() - 1; i != 0; i --)
-            for(auto j = 0; j != i; j ++)
-                if(nums[j] > nums[j+1]) 
-                    swap(nums[j],nums[j+1]);
-        
-        return nums;
-    }
-};
-
-class Solution4 {
-public:
-    void sortArray(int nums[], int size){
-        for(auto i = size - 1; i != 0; i --)
-            for(auto j = 0; j != i; j ++)
-                if(nums[j] > nums[j+1]) 
-                    swap(nums[j],nums[j+1]);
-    }
-};
-
-class Solution5 {
-public:
-    void sortArray(int nums[], int size){
-        for(int i = 0; i < size - 1; i ++)
-            for(int j = 0; j < size - i - 1; j ++)
-                if(nums[j] > nums[j+1]) {
-                    int temp = nums[j];
-                    nums[j] = nums[j+1];
-                    nums[j+1] = temp;
-                }
-    }
-};
-
-// 有问题
-class Solution6 {
-public:
-// Bubble Sort
-    vector<int> sortArray(vector<int>& nums){
-        for(auto i = 0; i != nums.size(); i ++){
-            for(auto j = 0; j != i; j++)
-                if(nums[j] > nums[j+1]) swap(nums[j],nums[j+1]);
         }
+
         return nums;
     }
 };
 
 int main(){
-    vector<int> nums{1,3,4,5,6,7,7,8,4,12,3,9};
-    // int nums [] = {1,3,4,5,6,7,7,8,4,12,3,9};
-    Solution6 sol;
+    vector<int> nums{10,3,7,4,12,5,2};
+    // int nums [] = {10,3,7,4,12,5,2};
+    Solution1 sol;
 
     cout << "orgninal: ";
     for(auto i : nums)

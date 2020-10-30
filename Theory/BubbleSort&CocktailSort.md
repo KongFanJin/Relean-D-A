@@ -31,9 +31,18 @@
 
 ```C++
 // Bubble Sort
+// increasing order
 class Solution {
 public:
-
+    vector<int> sortArray(vector<int>& nums){
+        // 每趟扫描将最大元素交换到a[n-1-i]的位置
+        for(auto i = 0; i != nums.size() - 1; i ++)
+            for(auto j = 0; j != nums.size() - i - 1; j++)
+                if(nums[j] > nums[j+1]) 
+                    swap(nums[j],nums[j+1]);
+        
+        return nums;
+    }
 };
 ```
 ```C++
@@ -41,6 +50,21 @@ public:
 // Add Flag
 class Solution {
 public:
+    vector<int> sortArray(vector<int>& nums){
+        // 发生交换设为true,未发生交换说明是不递减序列,设为false跳出比较
+        bool flag = true;
+        for(auto i = 0; flag && i != nums.size() - 1; i ++){
+            flag = false; 
+            for(auto j = 0; j != (nums.size() - 1) - i; j++)
+                if(nums[j] > nums[j+1]) {
+                    swap(nums[j],nums[j+1]);
+                    flag = true;
+                }
+        }
+        
+        return nums;
+    }
+};
 
 };
 ```
