@@ -57,23 +57,35 @@ public:
     // InsertionSortX
     // increasing order
     vector<int> sortArray(vector<int>& nums){
-		bool exchanges = false;
+        // put smallest element in position to serve as sentinel
+        // 将较大的元素向右移动,这样最小的元素就被交换到nums[0]
+	    bool exchanges = false;
      	for(auto i = nums.size() - 1; i != 0; i --){
             if(nums[i] < nums[i-1]) {
                 swap(nums[i], nums[i-1]);
+                // 标记交换过
                 exchanges = true;
             }            
         }
 		
+        // 没有交换过,即nums[i]总是大于nums[i-1],序列是递增的
         if(!exchanges) return nums;
         
+        // insertion sort with half-exchanges
+        // nums[0]是最小元素,nums[0] < nums[1]
+        // 从nums[1]与nums[2]开始处理
         for(auto i = 2; i != nums.size(); i++){
             auto j = i;
             auto v = nums[i];
-            for(; v < nums[j-1]; j--)
-                nums[j] = nums[j-1];
-            
-            nums[j] = v;
+            // 若nums[i] < nums[i-1]
+            // 将nums[i-1]覆盖nums[i],即将比nums[i]打的元素向右移一位
+		   while(v < nums[j-1]){ 
+               nums[j] = [j-1]; 
+               j --;
+           }
+            // 通过循环将比v(nums[i])大的元素通过覆盖num[i]右移
+            // 相当在比v(nums[i])小的元素后后面"空"出一位
+           nums[j] = v;
         }
         
     	return nums;
@@ -83,5 +95,6 @@ public:
 
 总的来说，插入排序对千部分有序的数组十分高效，也很适合小规模数组 。 这很重要，因为这些类型的数组在实际应用中经常出现，而且它们也是高级排序算法的中间过程 。 我们会在学习高级排序算法时再次接触到插入排序 。   
 
-> 因为leetcode超时,时间复杂度大致还是$O(n^2)$,改进的没有意义
-
+> leetcode超时,时间复杂度大致还是$O(n^2)$,改进的没有意义?
+>
+> - 可能由于测试数据集都是随机序列
