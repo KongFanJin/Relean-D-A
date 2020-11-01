@@ -22,8 +22,42 @@ public:
         // nums[0] 默认已排好序
         // i之前是排序好序的序列,i之后是未排序的序列
         for(auto i = 1; i != nums.size(); i++){ 
-            // 将nums[i]插入nums[i-1],nums[i-2],...,nums[1]序列中
-            // 通过交换,选一个比nums[i]小的位置;可能会不止一次的交换
+            // 要插入的元素值
+			auto v = nums[i]; 
+            // 要插入的元素位置
+            auto p = i; 
+            // 目的:将nums[i]插入nums[i-1],nums[i-2],...,nums[1],num[0]序列中
+            // 保证要插入的位置不能小于0
+            // 当左侧位置的元素小于要插入的元素值时,需要向左移动,以便继续比较找合适的位置插入
+            while(p > 0 && nums[p-1] > v) {
+                // 要插入的元素的值已经被v存储,被覆盖了也无所谓,找到新位置重新赋值即可
+                nums[p] = nums[p-1];
+                // 移动下标
+                p = p - 1;
+            }
+            //经过上面的循环,找到了合适的插入位置
+            nums[p] = v;
+        }
+    
+         return nums;
+    }
+};
+```
+> `while`只是向右移动元素找位置,并不是交换元素
+>
+> - 相当于插入扑克牌时,一直拿着要插入的扑克牌,找到位置后,插入
+
+```C++
+class Solution {
+public:
+    // InsertionSort
+    // increasing order
+    vector<int> sortArray(vector<int>& nums){
+        // nums[0] 默认已排好序
+        // i之前是排序好序的序列,i之后是未排序的序列
+        for(auto i = 1; i != nums.size(); i++){ 
+            // 将nums[i]插入nums[i-1],nums[i-2],...,nums[1],num[0]序列中
+            // 通过交换,找num[j-1]<num[j]=nums[i]<num[j+1]的位置j;可能会不止一次的交换
             for(auto j = i; j != 0 && nums[j] < nums[j-1]; j--)
                 swap(nums[j],nums[j-1]);
         }
@@ -32,6 +66,8 @@ public:
     }
 };
 ```
+
+> 插入扑克牌,向左交换,在不大于要插入扑克牌的值处停止
 
 ## 算法分析(待补)
 
