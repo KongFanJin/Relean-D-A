@@ -38,6 +38,24 @@ vector<int> sortArray(vector<int>& nums){
 }
 ```
 
+```C++
+// Selection Sort
+vector<int> sortArray(vector<int>& nums){
+	for(auto end = nums.size() - 1; end != 0; end--){
+        int max = end;
+        for(auto begin = 0; begin < end; begin++)
+            if(nums[begin] < nums[begin+1])
+            	max = begin;
+        
+        swap(nums[end],swap[max]);
+    }
+    
+    return nums;
+}
+```
+
+
+
 ## 算法分析
 
 - $\sum_{i=0}^n\sum_{j=i+1}^n\cdot 1 = \sum_{i=0}^n(n-(i+1))$
