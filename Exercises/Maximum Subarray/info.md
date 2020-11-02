@@ -60,34 +60,20 @@ Output: -2147483647
 
 # Analysis
 
-若$sum > 0$, 
+`sum+nums[i]`与`sum`
 
-- $sum+正数$变大,$sum+负数$变小
-- `sum = max(sum,sum+e)`
+若`sum >= 0`
 
-若$sum <= 0$
+- `sum+正数`,​变大
+- `sum+负数`,变小
+- `sum = max(sum,sum+nums[i])`
 
-- $负数+负数$需要取最大值,$负数+正数$无意义直接取正数即可
-- `sum=e`
+若`sum < 0​`
 
-变大
-
-- ++:sum + i > sum
-
-变小
-
-- +-:sum + i < sum
-- --:sum + i < i
-
-重新计数
-
-- -+ : sum = i
-- -- : sum = i
-
-总结
-
-- `sum < 0`时,`sum = i`
-- `sum > 0`时,`max(sum+i,sum)`
+- `sum + 负数`,就变得更小了
+  - 这时是取`sum = sum`,还是`sum = num[i]`?由于是子序列,不能跳格,故`sum = num[i]`,要重新开始
+- `sum + 正数`,反而抵消`正数`,`sum + nums[i] < nums[i]` ,这样不如直接取`sum = nums[i]`
+- 故`sum = nums[i]`
 
 # Code
 
