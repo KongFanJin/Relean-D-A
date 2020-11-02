@@ -71,7 +71,7 @@ public:
                     swap(nums[j], nums[j-h]);
             }
 
-            h = h + h/3;
+            h = h/3; // 向下取整
         }
 
         return nums;
@@ -81,7 +81,6 @@ public:
 
 > leetcode通过了,时间复杂度可见小于$O(n^2)$
 >
-> 本地测试产生"数组越界",原因待分析
 
 ## 实现2
 
@@ -112,27 +111,19 @@ public:
 ```C++
 class Solution {
 public:
-    // InsertionSort
-    // increasing order
     vector<int> sortArray(vector<int>& nums){
-		for(auto gap = n/2; gap > 0; gap = gap/2)
-        	for(auto i = gap; i != nums.size(); i++){ 
-        	    for(auto j = i; j != 0 && nums[j] < nums[j-gap]; j-=gap)
-        	        swap(nums[j],nums[j-gap]);
+		for(auto h = nums.size()/2; h > 0; h = h/2) //  每次缩小间隔,直到相邻为止
+        	for(auto i = h; i != nums.size(); i++){ 
+                // 类比插入排序将nums[i]插入nums[i-1],nums[i-2],...,nums[1]序列中
+                // 希尔排序将nums[i]插入nums[i-h],nums[i-2h],...序列中,h是变化的
+        	    for(auto j = i; j >= h && nums[j] < nums[j-h]; j-=h)
+        	        swap(nums[j],nums[j-h]);
         	}
     
          return nums;
     }
 };
 ```
-
-> 访问越界
-
-```C++
-
-```
-
-
 
 ## 算法分析 续
 

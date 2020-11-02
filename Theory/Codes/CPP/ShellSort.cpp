@@ -20,7 +20,7 @@ class Solution {
                     swap(nums[j], nums[j - h]);
             }
 
-            h = h + h / 3;
+            h =  h / 3;
         }
 
         return nums;
@@ -52,7 +52,7 @@ public:
     vector<int> sortArray(vector<int>& nums){
 		for(auto gap = nums.size()/2; gap > 0; gap = gap/2)
         	for(auto i = gap; i != nums.size(); i++){ 
-        	    for(auto j = i; j != 0 && nums[j] < nums[j-gap]; j-=gap)
+        	    for(auto j = i; j >= gap && nums[j] < nums[j-gap]; j-=gap)
         	        swap(nums[j],nums[j-gap]);
         	}
     
@@ -63,7 +63,7 @@ public:
 int main() {
     vector<int> nums{10, 3, 7, 4, 12, 5, 2};
     // int nums [] = {10,3,7,4,12,5,2};
-    Solution sol;
+    Solution3 sol;
 
     cout << "orgninal: ";
     for (auto i : nums) cout << i << " ";
