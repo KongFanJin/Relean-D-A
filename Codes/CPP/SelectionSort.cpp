@@ -37,7 +37,7 @@ class Solution2 {
 };
 
 int main() {
-    vector<int> nums{10, 3, 7, 4, 12, 5, 2};
+    vector<int> nums{10, 3, 10, 4, 12, 5, 2};
     // int nums [] = {10,3,7,4,12,5,2};
     Solution2 sol;
 

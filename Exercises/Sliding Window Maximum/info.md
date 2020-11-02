@@ -9,7 +9,9 @@ tags:
 created: 2020-10-23T08:15:44.232Z
 modified: 2020-10-25T22:28:33.755Z
 ---
-[题目原址-239](https://leetcode-cn.com/problems/sliding-window-maximum/)
+[LeetCode 239. Sliding Window Maximum](https://leetcode-cn.com/problems/sliding-window-maximum/)
+
+[剑指 Offer 59 - I. 滑动窗口的最大值](https://leetcode-cn.com/problems/hua-dong-chuang-kou-de-zui-da-zhi-lcof/)
 
 参考
 
@@ -41,7 +43,7 @@ modified: 2020-10-25T22:28:33.755Z
  1  3  -1  -3  5 [3  6  7]      7
 ```
 
-# 提示
+# 要求
 
 - $1 <= nums.length <= 10^5$
 - $-10^4 <= nums[i] <= 10^4$
@@ -143,4 +145,3 @@ SUMMARY: UndefinedBehaviorSanitizer: undefined-behavior /usr/bin/../lib/gcc/x86_
 
 - 熟悉已有的工具(库)的性质
 - 尽量要用现有工具解决问题
-

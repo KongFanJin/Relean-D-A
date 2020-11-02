@@ -97,14 +97,11 @@ public:
 ```
 
 ```C++
-// Bubble SortX2
-// Add Flag
+// Bubble SortX2-1
 // 数组的尾部元素有序时
 // 记录最后一次的交换的元素的位置,减少比较次数
-// 恋上数据结构第二季
-
-// Bubble Sort
-// increasing order
+// 参考恋上数据结构第二季
+// 从右到左
 class Solution1 {
 public:
     vector<int> sortArray(vector<int>& nums){
@@ -117,25 +114,25 @@ public:
                 }
            i =  index;        
         }
-
         
         return nums;
     }
 };
 
+// Bubble SortX2-2
+// 从左到右(有问题未解决)
 class Solution2 {
 public:
     vector<int> sortArray(vector<int>& nums){
-        auto index = 1;
+        int index = 0;
         for(auto i = 0; i != nums.size() - 1; i ++){
-            for(auto j = 0; j != (nums.size() - 1) - i; j++)
+            auto index = 0;
+            // j != (nums.size() - 1) - i 如何在此加入上次的比较位置index,这样就不用进入循环体了
+            for(auto j = 0; j != (nums.size() - 1) - i; j++) 
                 if(nums[j] > nums[j+1]){
                     swap(nums[j],nums[j+1]);   
                     index = j + 1; // 记录本趟最后交换元素的位置
                 }
-            // j != (nums.size() - 1) - i
-            // index = (nums.size() - 1) - i => i = (nums.size() - 1)-index
-            i = (nums.size() - 1) - index;
         }
         return nums;
     }

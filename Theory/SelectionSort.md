@@ -24,6 +24,9 @@
 
 ```C++
 // Selection Sort
+// Increasing Order
+
+// 选最小位置
 class Solution1 {
    public:
     vector<int> sortArray(vector<int>& nums) {
@@ -39,10 +42,8 @@ class Solution1 {
         return nums;
     }
 };
-```
 
-```C++
-// Selection Sort
+// 选最大位置
 class Solution2 {
    public:
     vector<int> sortArray(vector<int>& nums) {
@@ -58,13 +59,9 @@ class Solution2 {
         return nums;
     }
 };
-
 ```
-
-
 
 ## 算法分析
 
 - $\sum_{i=0}^n\sum_{j=i+1}^n\cdot 1 = \sum_{i=0}^n(n-(i+1))$
 - 粗略分析:二重循环$O(n^2)$
-
