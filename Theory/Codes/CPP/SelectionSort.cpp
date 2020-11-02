@@ -19,14 +19,15 @@ class Solution1 {
     }
 };
 
-// 待整理
+
 class Solution2 {
    public:
     vector<int> sortArray(vector<int>& nums) {
         for (auto end = nums.size() - 1; end != 0; end--) {
             int max = end;
             for (auto begin = 0; begin < end; begin++)
-                if (nums[begin] < nums[begin + 1]) max = begin + 1;
+                // > Descending Order 
+                if (nums[max] < nums[begin]) max = begin;
 
             swap(nums[end], nums[max]);
         }
