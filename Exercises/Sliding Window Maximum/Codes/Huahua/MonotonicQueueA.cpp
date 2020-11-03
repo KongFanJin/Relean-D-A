@@ -7,19 +7,16 @@ class MonotonicQueue {
 };
 
 /*
-  滑动窗口的位置               Monotonic Queue		  最大值
----------------               --------------- 		-----
-[1]  3  -1 -3  5  3  6  7     [1]					-
-push 1,1即为max [1  3]  -1 -3  5  3  6  7     [3]
--	  push 3, 3 > 1, 1出队
-[1  3  -1] -3  5  3  6  7     [3,-1]				3     push -1,
--1 < 3, -1入队; 3个元素了, 最大值3 1 [3  -1  -3] 5  3  6  7     [3,-1,-3]
-3     窗口移位1, push -3, -3 < -1, -3入队; 最大值3 1  3 [-1  -3  5] 3  6  7 [5]
-5     窗口移位1, push 5, 5 > -1; -1,-3出队; 最大值5 1  3  -1 [-3  5  3] 6  7
-[5,3]                 5     窗口移位1, push 3, 3 < 5, 3入队; 最大值5 1  3  -1 -3
-[5  3  6] 7     [6]                   6     窗口移位1, push 6, 6 > 5, 5出队;
-最大值5 1  3  -1  -3  5 [3  6  7]    [7]                   7     窗口移位1, push
-7, 7 > 6, 6出队; 最大值7
+  滑动窗口的位置              Monotonic Queue  最大值
+---------------              ---------------  ------
+[1]  3  -1 -3  5  3  6  7    [1]			   -     push 1,1即为max 
+[1  3]  -1 -3  5  3  6  7    [3]               -	 push 3, 3 > 1, 1出队
+[1  3  -1] -3  5  3  6  7    [3,-1]			   3     push -1,-1 < 3, -1入队; 3个元素了, 最大值3 
+1 [3  -1  -3]  5  3  6  7    [3,-1,-3]         3     窗口移位1, push -3, -3 < -1, -3入队; 最大值3 
+1  3 [-1  -3   5] 3  6  7    [5]               5     窗口移位1, push 5, 5 > -1; -1,-3出队; 最大值5 
+1  3  -1 [-3   5  3] 6  7    [5,3]             5     窗口移位1, push 3, 3 < 5, 3入队; 最大值5 
+1  3  -1 -3   [5  3  6] 7    [6]               6     窗口移位1, push 6, 6 > 5, 5出队; 最大值5 
+1  3  -1  -3  5  [3  6  7]   [7]               7     窗口移位1, push7, 7 > 6, 6出队; 最大值7
 */
 
 // Author: Huahua
@@ -52,24 +49,26 @@ class MonotonicQueue {
 
    private:
     deque<int> data_;
+};
 
-    class Solution {
-       public:
-        vector<int> maxSlidingWindow(vector<int> &nums, int k) {
-            MonotonicQueue q;
-            vector<int> ans;
+class Solution {
+   public:
+    vector<int> maxSlidingWindow(vector<int> &nums, int k) {
+        MonotonicQueue q;
+        vector<int> ans;
 
-            for (int i = 0; i < nums.size(); ++i) {
-                q.push(nums[i]);
+        for (int i = 0; i < nums.size(); ++i) {
+            q.push(nums[i]);
 
-                if (i - k + 1 >= 0) {        // 有足够的元素(k个)了
-                    ans.push_back(q.max());  // 取最大值加入ans中
+            if (i - k + 1 >= 0) {        // 有足够的元素(k个)了
+                ans.push_back(q.max());  // 取最大值加入ans中
 
-                    // 若不等则nums[i - (k - 1)]一定小于q.max(),然后在push就会被pop
-                    // 若相等,需要滑动窗口时,nums[i - (k - 1)]也需要被pop
-                    if (nums[i - (k - 1)] == q.max()) q.pop();
-                }
+                // 若不等则nums[i - (k -
+                // 1)]一定小于q.max(),然后在push就会被pop
+                // 若相等,需要滑动窗口时,nums[i - (k - 1)]也需要被pop
+                if (nums[i - (k - 1)] == q.max()) q.pop();
             }
-            return ans;
         }
-    };
+        return ans;
+    }
+};
