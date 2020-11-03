@@ -5,7 +5,7 @@
 参考
 
 - [花花酱 LeetCode 53. Maximum Subarray](http://zxi.mytechroad.com/blog/dynamic-programming/leetcode-53-maximum-subarray/)
-- [整理一下看得懂的答案！！！](https://leetcode-cn.com/problems/maximum-subarray/solution/zheng-li-yi-xia-kan-de-dong-de-da-an-by-lizhiqiang/)
+- [画解算法：53. 最大子序和](https://leetcode-cn.com/problems/maximum-subarray/solution/hua-jie-suan-fa-53-zui-da-zi-xu-he-by-guanpengchn/)
 
 # 题目描述
 
@@ -60,7 +60,59 @@ Output: -2147483647
 
 # Analysis & Code
 
-## 
+## Brute Force
+
+很容易想到是穷举法,穷举所有的子区间,然后计算序列和
+
+> $n!$种排列
+
+```C++
+// 计算序列和
+for(auto i = 0; i < nums.size(); i++)
+    sum += nums[i];
+
+// 或
+for(auto e : nums)
+    sum += e;
+
+// 或
+sum = accumulate(nums.begin(), nums.end(), 0);
+```
+
+```C++
+// 加入外层循环控制
+for(auto j = 0; j != nums.size(); j++)
+    for(auto i = 0; i <= j; i++)
+        sum = accumulate(nums[i], nums[j], 0);
+```
+
+```C++
+// 取最大值
+auto Max = nums[0];
+for(auto j = 0; j != nums.size(); j++)
+    for(auto i = j; != nums.size(); i++){
+        sum = accumulate(nums[i], nums[j], 0);
+        Max = max(sum, Max);
+    }
+```
+
+```C++
+class Solution {
+   public:
+    int maxSubArray(vector<int> nums) {
+		auto Max = nums[0];
+		for(auto j = 0; j != nums.size(); j++)
+    		for(auto i = j; != nums.size(); i++){
+        		sum = accumulate(nums[i], nums[j], 0);
+        		Max = max(sum, Max);
+    	}
+        
+        return Max;
+    }
+};
+```
+
+
 
 ## DP
 
@@ -88,7 +140,6 @@ Output: -2147483647
 重复循环...
 
 ```C++
-// https://leetcode-cn.com/problems/maximum-subarray/solution/hua-jie-suan-fa-53-zui-da-zi-xu-he-by-guanpengchn/
 class Solution {
    public:
     int maxSubArray(vector<int> nums) {
@@ -118,7 +169,6 @@ class Solution {
 
 ```C++
 // Author: Huahua
-// http://zxi.mytechroad.com/blog/dynamic-programming/leetcode-53-maximum-subarray/
 /**
  * 以num[i]为主来考虑(注num[i]+f(i-1)),而不是f(i-1)(注f(i-1)+num[i]),
  * num[i]+正数变大,num[i]+负数变小
