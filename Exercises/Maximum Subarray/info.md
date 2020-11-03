@@ -101,9 +101,9 @@ class Solution {
    public:
     int maxSubArray(vector<int> nums) {
 		auto Max = nums[0];
-		for(auto j = 0; j != nums.size(); j++)
-    		for(auto i = j; != nums.size(); i++){
-        		sum = accumulate(nums[i], nums[j], 0);
+		for(auto j = nums.begin(); j != nums.end(); j++)
+    		for(auto i = j; i!= nums.end(); i++){
+        		sum = accumulate(*i, *j, 0);
         		Max = max(sum, Max);
     	}
         
