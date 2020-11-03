@@ -87,16 +87,31 @@ public:
         f[0] = nums[0];
         
         for (int i = 1; i < nums.size(); ++i)
-            // 若nums[i] + f[i - 1] > nums[i],即f(i-1) > 0, f(i) = num[i] + f(i-1)
-            // 若nums[i] + f[i - 1] < nums[i],即f(i-1) < 0, f(i) = num[i]
             f[i] = max(nums[i] + f[i - 1], nums[i]);
         
         return *std::max_element(f.begin(), f.end());
     }
 };
 
+
+// Solution4的改进,使用O(1)的空间复杂度
+class Solution4X {
+public:
+    int maxSubArray(vector<int>& nums) {
+        auto ans = nums[0];
+        auto sum = nums[0];    
+        for (int i = 1; i < nums.size(); ++i){
+            sum =  max(nums[i] + sum, nums[i]);
+            if(sum > ans) ans = sum;
+        }
+
+        return ans;
+    }
+};
+
+
 int main() {
-    Solution sol;
+    Solution4 sol;
     vector<int> nums{-2, 1, -3, 4, -1, 2, 1, -5, 4};
 
     cout << "nums: ";
