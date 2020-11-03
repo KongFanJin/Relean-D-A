@@ -60,20 +60,101 @@ Output: -2147483647
 
 # Analysis
 
-`sum+nums[i]`与`sum`
+## DP
 
-若`sum >= 0`
+`...,i-1,i,i+1,...`
 
-- `sum+正数`,​变大
-- `sum+负数`,变小
-- `sum = max(sum,sum+nums[i])`
+### 分类讨论
 
-若`sum < 0​`
+`pre`记住上一轮的连续子序列最大和
 
-- `sum + 负数`,就变得更小了
-  - 这时是取`sum = sum`,还是`sum = num[i]`?由于是子序列,不能跳格,故`sum = num[i]`,要重新开始
-- `sum + 正数`,反而抵消`正数`,`sum + nums[i] < nums[i]` ,这样不如直接取`sum = nums[i]`
-- 故`sum = nums[i]`
+若`sum(i-1) >= 0`
+
+- `sum(i-1)+正数`,变大
+- `sum(i-1)+负数`,变小
+- 总结:需要确定`max(sum(i-1),sum(i-1)+nums[i])`是前进还是回退
+
+若`sum(i-1) < 0`
+
+- `sum(i-1) + 负数`,就变得更小了
+  - 需要确定`max(sum(i-1),nums[i])`是回退还是重新开始
+- `sum(i-1) + 正数`,反而抵消`正数`,`sum(i-1) + nums[i] < nums[i]` ,这样不如直接取`sum(i) = nums[i]`重新开始
+- 总结:由于`pre`记住`sum(i-1)`,因此令`sum(i) = nums[i]`,然后`max(pre,sum(i))`等效于 `max(sum(i-1),nums[i])`
+
+最后`pre = max(pre,sum(i))`
+
+重复循环...
+
+```C++
+// https://leetcode-cn.com/problems/maximum-subarray/solution/hua-jie-suan-fa-53-zui-da-zi-xu-he-by-guanpengchn/
+class Solution {
+   public:
+    int maxSubArray(vector<int> nums) {
+        int pre = nums[0];
+        int sum = nums[0];
+
+        for (auto element : nums) {
+            if (sum > 0) { 
+                sum += element;
+            } else if (sum <= 0) { 
+                sum = element;
+            }
+            
+            pre = max(pre, sum); 
+        } 
+
+        return pre; // 为什么是pre不是sum?是因为要加入下一个元素(nums[n])时循环退出了
+    }
+};
+```
+
+### 不分类讨论
+
+> 实际暗含了分类讨论
+>
+> 任何想到的呢?
+
+忽略正负数的思考
+
+`sum[i]`表示在遍历到数组的元素`num[i]`的连续子序列最大和
+
+若`sum[i-1]+nums[i] > nums[i] `
+
+- 令`sum[i] = sum[i-1]+nums[i]`,比较`sum[i]`与`sum[i-1]`
+  - 若`sum[i] > sum[i-1]`,取`sum[i] = sum[i]`,产生一个连续子序列最大和
+  - 若`sum[i] < sum[i-1]`,取`sum[i] = sum[i-1]`,产生一个连续子序列最大和
+
+若`sum[i-1]+nums[i] < nums[i] `
+
+- 令`sum[i] = nums[i]`,比较`nums[i]`与`sum[i-1]`
+  - 若`nums[i] > sum[i-1]`,取`sum[i] = nums[i]`重新开始
+  - 若`nums[i] < sum[i-1]`,取`sum[i] = sum[i-1]`,产生一个连续子序列最大和
+
+```C++
+// https://leetcode-cn.com/problems/maximum-subarray/solution/hua-jie-suan-fa-53-zui-da-zi-xu-he-by-guanpengchn/
+class Solution{
+   public:
+    int maxSubArray(vector<int> nums) {
+        auto sum = nums[0];
+        auto next = nums[0];
+
+        for (auto i = 1; i != nums.size(); i++) {
+            next = max(next + nums[i], nums[i]);
+            sum = max(sum, next);
+        }
+
+        return sum;
+    }
+};
+```
+
+>  感觉类似斐波那契数列的迭代形式,刚开始学习DP,还不清楚DP是否都是这种形式
+
+```C++
+
+```
+
+
 
 # Code
 
