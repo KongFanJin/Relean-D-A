@@ -17,3 +17,6 @@ modified: 2020-10-21T02:05:07.315Z
 - 算法设计与分析 2th/习题解析 屈婉玲
 - 算法导论 3th
 - 离散数学及其应用 8th
+- [liuyubobobo](https://github.com/liuyubobobo/liuyubobobo)
+- 恋上数据结构与算法
+- leetcode
