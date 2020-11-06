@@ -1,2 +1,3 @@
-- Bubble待补
-- HeapSort待补
+- Bubble
+- HeapSort
+- Tree - BST
