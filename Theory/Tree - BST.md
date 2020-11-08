@@ -125,16 +125,14 @@ int search(vector<int>& nums, int target) {
 
 > 二分搜索树不一定是一颗完全二叉树;堆一定是完全二叉树,所以堆可以用数组来表示
 
-# 接口设计
+## Insert
 
-```C++
-int size();
-bool isEmpty();
-void clear();
-void add(E element);
-void remove(E element);
-bool contains(E elements);
-```
+如何插入一个新节点
 
-# 实现
+- 与根`key`比较
+  - 大:右子树
+  - 小:左子树
+- 递归此过程
+  - 为空,直接插入
+  - 不为空,"覆盖"
 
