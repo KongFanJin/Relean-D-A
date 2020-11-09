@@ -138,17 +138,86 @@ int search(vector<int>& nums, int target) {
 
 ```C++
 // Recursion
-Node* insert(Node *node, Key key, Value value){
-    if(node == nullptr){ // base
+Node* insertRecursive(Node*& node, Key key, Value value) {
+    if (node == nullptr) {  // base
         count++;
         return new Node(key, value);
     }
-    if(key == noke->key)
-        node->value = value; // update value
-    else if(key < node->key)
+
+    if (key == node->key)
+        node->value = value;  // update value
+    else if (key < node->key)
         node->left = insert(node->left, key, value);
     else
         node->right = insert(node->right, key, value);
+
+    return node;
 }
+```
+
+```C++
+// 用两个指针记录父节点和子节点,迭代匹配,找到后插入父节点
+// Iterative function to insert a key into BST.
+// Root is passed by reference to the function
+Node* insertIterative(Node*& node, Key key, Value value) {
+    // start with root node
+    Node* curr = root;
+
+    // pointer to store parent node of current node
+    Node* parent = nullptr;
+
+    // if tree is empty, create a new node and set root
+    if (root == nullptr) {
+        count++;
+        return root = new Node(key, value);
+    }
+
+    // traverse the tree and find parent node of key
+    while (curr != nullptr) {
+        // update parent node as current node
+        parent = curr;
+
+        // if given key is less than the current node, go to left subtree
+        // else go to right subtree
+        if (key < curr->key)
+            curr = curr->left;
+        else
+            curr = curr->right;
+    }
+
+    // construct a new node and assign to appropriate parent pointer
+    if (key == node->key) {
+        parent->value = value;
+    } else if (key < parent->key) {
+        parent->left = new Node(key, value);
+    } else {
+        parent->right = new Node(key, value);
+    }
+
+    return root;
+}
+```
+
+# Contains/Search
+
+> [04-Binary-Search-Tree-Search](https://github.com/liuyubobobo/Play-with-Algorithms/tree/master/05-Binary-Search-Tree/Course%20Code%20(C%2B%2B)/04-Binary-Search-Tree-Search)
+>
+> - CLion编译不通过
+> - VSCode可以编译
+
+- 递归实现与Insert类似
+
+
+
+二分搜索与顺序搜索的比较
+
+```shell
+There are totally 431180 words in bible.txt
+
+'god' : 2301
+BST , time: 1.019 s.
+
+'god' : 2301
+SST , time: 20.864 s.
 ```
 
