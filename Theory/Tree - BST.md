@@ -136,3 +136,19 @@ int search(vector<int>& nums, int target) {
   - 为空,直接插入
   - 不为空,"覆盖"
 
+```C++
+// Recursion
+Node* insert(Node *node, Key key, Value value){
+    if(node == nullptr){ // base
+        count++;
+        return new Node(key, value);
+    }
+    if(key == noke->key)
+        node->value = value; // update value
+    else if(key < node->key)
+        node->left = insert(node->left, key, value);
+    else
+        node->right = insert(node->right, key, value);
+}
+```
+
