@@ -51,6 +51,12 @@ public:
         return contain(root, key);
     }
 
+    // Node* search(Key key); // public: Node
+    // Value search(Key key); // Value is not NULL
+    Value* search(Key key){
+        return search(root, key);
+    }
+
 private:
     // Recursion
     Node* insertRecursive(Node* &node, Key key, Value value) {
@@ -118,4 +124,17 @@ private:
         else
             contain(node->right, key);
     }
+
+    Value* search(const Node* &node, Key key) const{
+        if (node == nullptr) { // base
+            return nullptr;
+        }
+        if (key == node->key)
+            return &(node->value);
+        else if (key < node->key)
+            return search(node->left, key, value);
+        else
+            return search(node->right, key, value);
+    }
 };
+
