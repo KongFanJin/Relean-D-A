@@ -44,12 +44,16 @@ public:
     }
 
     void insert(Key key, Value value) {
-        root = insert(root, key, value);
+        root = insertRecursive(root, key, value);
+    }
+
+    bool contain(Key key){
+        return contain(root, key);
     }
 
 private:
     // Recursion
-    Node* insertRecursive(Node *&node, Key key, Value value) {
+    Node* insertRecursive(Node* &node, Key key, Value value) {
         if (node == nullptr) { // base
             count++;
             return new Node(key, value);
@@ -65,7 +69,7 @@ private:
     // 用两个指针记录父节点和子节点,迭代匹配,找到后插入父节点
     // Iterative function to insert a key into BST.
     // Root is passed by reference to the function
-    Node* insertIterative(Node* &node, int key, int value) {
+    Node* insertIterative(Node* &node, Key key, Value value) {
         // start with root node
         Node* curr = root;
 
@@ -101,5 +105,17 @@ private:
         }
 
         return root;
+    }
+
+    bool contain(const Node* &node, Key key) const{
+        if(node == nullptr) // base
+            return false;
+
+        if( key == node->key)
+            return ture;
+        else if(key < node->key)
+            contain(node->left, key);
+        else
+            contain(node->right, key);
     }
 };
