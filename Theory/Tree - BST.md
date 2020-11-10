@@ -207,7 +207,31 @@ Node* insertIterative(Node*& node, Key key, Value value) {
 
 - 递归实现与Insert类似
 
+```C++
+bool contain(const Node*& node, Key key) const {
+    if (node == nullptr)  // base
+        return false;
 
+    if (key == node->key)
+        return ture;
+    else if (key < node->key)
+        contain(node->left, key);
+    else
+        contain(node->right, key);
+}
+
+Value* search(const Node*& node, Key key) const {
+    if (node == nullptr) {  // base
+        return nullptr;
+    }
+    if (key == node->key)
+        return &(node->value);
+    else if (key < node->key)
+        return search(node->left, key, value);
+    else
+        return search(node->right, key, value);
+}
+```
 
 二分搜索与顺序搜索的比较
 
@@ -219,5 +243,40 @@ BST , time: 1.019 s.
 
 'god' : 2301
 SST , time: 20.864 s.
+```
+
+# Traverse
+
+- 前序(先根)遍历:根->左->右
+- 中序(中根)遍历:左->根->右
+  - 输出结果是从小到大排列(这是由二分搜索树定义决定的性质)
+- 后序(后根)遍历:左->右->根
+
+## Recursive
+
+```C++
+void preOrder(Node* node) {
+    if (node != nullptr) {
+        cout << node->key << "\n";
+        preOrder(node->left);
+        preOrder(node->right);
+    }
+}
+
+void inOrder(Node* node) {
+    if (node != nullptr) {
+        inOrder(node->left);
+        cout << node->key << "\n";
+        inOrder(node->right);
+    }
+}
+
+void postOrder(Node* node) {
+    if (node != nullptr) {
+        inOrder(node->left);
+        inOrder(node->right);
+        cout << node->key << "\n";
+    }
+}
 ```
 
