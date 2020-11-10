@@ -32,6 +32,7 @@ class BST {
 
     ~BST() {
         // TODO: ~BST()
+        destroy(root);
     }
 
     // 返回二分搜索树的节点个数
@@ -58,7 +59,7 @@ class BST {
 
    private:
     // Recursion
-    Node* insertRecursive(Node*& node, Key key, Value value) {
+    Node* insertRecursive(Node* &node, Key key, Value value) {
         if (node == nullptr) {  // base
             count++;
             return new Node(key, value);
@@ -74,7 +75,7 @@ class BST {
     // 用两个指针记录父节点和子节点,迭代匹配,找到后插入父节点
     // Iterative function to insert a key into BST.
     // Root is passed by reference to the function
-    Node* insertIterative(Node*& node, Key key, Value value) {
+    Node* insertIterative(Node* &node, Key key, Value value) {
         // start with root node
         Node* curr = root;
 
@@ -112,7 +113,7 @@ class BST {
         return root;
     }
 
-    bool contain(const Node*& node, Key key) const {
+    bool contain(const Node* &node, Key key) const {
         if (node == nullptr)  // base
             return false;
 
@@ -124,7 +125,7 @@ class BST {
             contain(node->right, key);
     }
 
-    Value* search(const Node*& node, Key key) const {
+    Value* search(const Node* &node, Key key) const {
         if (node == nullptr) {  // base
             return nullptr;
         }
@@ -157,6 +158,18 @@ class BST {
             inOrder(node->left);
             inOrder(node->right);
             cout << node->key << "\n";
+        }
+    }
+
+
+    // Post Order
+    void destroy(Node* node){
+        if(node != nullptr){
+            destroy(node->left);
+            destroy(node->right);
+
+            delete node;
+            count--;
         }
     }
 };
