@@ -526,8 +526,10 @@ Node *remove(Node *node, Key key) {
   - AVL树
   - 伸展树(Splay tree)
 
-### `Treap` (Tree + Heap)
+# `Treap` (Tree + Heap)
 
 ### `Trie`
 
 $O(length(key))$
+
+词频统计
