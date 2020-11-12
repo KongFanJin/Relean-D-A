@@ -118,7 +118,8 @@ class BST {
             return false;
 
         if (key == node->key)
-            return ture;
+            return true;
+
         else if (key < node->key)
             contain(node->left, key);
         else
@@ -132,9 +133,9 @@ class BST {
         if (key == node->key)
             return &(node->value);
         else if (key < node->key)
-            return search(node->left, key, value);
+            return search(node->left, node->key, node->value);
         else
-            return search(node->right, key, value);
+            return search(node->right, node->key, node->value);
     }
 
     void preOrder(Node* node) {
@@ -160,7 +161,6 @@ class BST {
             cout << node->key << "\n";
         }
     }
-
 
     // Post Order
     void destroy(Node* node){

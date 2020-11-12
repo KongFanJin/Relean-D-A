@@ -2,7 +2,6 @@
 
 - 恋上数据结构与算法 小码哥
 - 算法与数据结构 liuyubobobo
-- [花花酱 LeetCode 102. Binary Tree Level Order Traversal](http://zxi.mytechroad.com/blog/leetcode/leetcode-102-binary-tree-level-order-traversal/)
 
 # 思考一个问题
 
@@ -31,7 +30,7 @@
 
 # Binary Search(BS)
 
-详细见[二分查找细节详解，顺便赋诗一首](https://leetcode-cn.com/problems/binary-search/solution/er-fen-cha-zhao-xiang-jie-by-labuladong/)
+> 设计对已排序序列的处理都可以套用BS,[详见](..\Exercises\Binary Search)
 
 ```C++
 template<typename T>
@@ -114,7 +113,7 @@ int search(vector<int>& nums, int target) {
 
 # Binary Search Tree(BST)
 
-> 二叉搜索树,二叉排序树二叉查找树
+> 二叉搜索树 = 二叉排序树 = 二叉查找树
 
 特点
 
@@ -127,6 +126,8 @@ int search(vector<int>& nums, int target) {
 > 二分搜索树不一定是一颗完全二叉树;堆一定是完全二叉树,所以堆可以用数组来表示
 
 ## Insert
+
+> [701. Insert into a Binary Search Tree](https://leetcode-cn.com/problems/insert-into-a-binary-search-tree/)
 
 如何插入一个新节点
 
@@ -285,3 +286,21 @@ void postOrder(Node* node) {
 
 # Traverse Level
 
+层次遍历
+- DFS
+  - 递归实现
+    - 用二维数组实现, 见[代码](..\Exercises\Binary Tree Level Order Traversal)
+      - 需要记录深度(层数)
+- 非递归实现
+  
+- BFS
+  - 用两个vector(其中存储的是节点信息)实现, 见[代码](..\Exercises\Binary Tree Level Order Traversal)
+  - 用队列实现
+
+## DFS
+
+## BFS
+
+## vector
+
+### Queue
