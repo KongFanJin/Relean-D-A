@@ -1,3 +1,5 @@
+
+
 参考
 
 - 恋上数据结构与算法 小码哥
@@ -200,7 +202,7 @@ Node* insertIterative(Node*& node, Key key, Value value) {
 }
 ```
 
-# Contains/Search
+## Contains/Search
 
 > [04-Binary-Search-Tree-Search](https://github.com/liuyubobobo/Play-with-Algorithms/tree/master/05-Binary-Search-Tree/Course%20Code%20(C%2B%2B)/04-Binary-Search-Tree-Search)
 >
@@ -247,14 +249,14 @@ BST , time: 1.019 s.
 SST , time: 20.864 s.
 ```
 
-# Traverse
+## Traverse
 
 - 前序(先根)遍历:根->左->右
 - 中序(中根)遍历:左->根->右
   - 输出结果是从小到大排列(这是由二分搜索树定义决定的性质)
 - 后序(后根)遍历:左->右->根
 
-## Recursive
+### Recursive
 
 ```C++
 void preOrder(Node* node) {
@@ -282,9 +284,9 @@ void postOrder(Node* node) {
 }
 ```
 
-## Not Recursive
+### Not Recursive
 
-# Traverse Level
+## Traverse Level
 
 层次遍历
 - DFS
@@ -297,10 +299,235 @@ void postOrder(Node* node) {
   - 用两个vector(其中存储的是节点信息)实现, 见[代码](..\Exercises\Binary Tree Level Order Traversal)
   - 用队列实现
 
-## DFS
+### DFS
 
-## BFS
+### BFS
 
-## vector
+- 节点"入队"
+- "出队"节点,然后将其左右孩子入队
+- 重复此过程
 
-### Queue
+#### vector
+
+#### Queue
+
+## 删除最小值和最大值
+
+### 先找到最小值和最大值
+
+- 最小值
+  - 最左边的节点,
+  - 一直循环/递归找找左孩子,直到为空
+- 最大值
+  - 最右边的节点
+  - 一直循环/递归找找右孩子,直到为空
+
+```C++
+Node *minimum(Node *node) {
+  if (node->left == nullptr)
+    return node;
+
+  return minimum(node->left);
+}
+```
+
+```C++
+Node *minimum(const Node* &node) const {
+  Node *cur, pre;
+  pre = node;
+  cur = pre->left while (!cur->left) {
+    cur = cur->left;
+    pre = cur;
+  }
+
+  return cur;
+}
+```
+
+### 删除最小值和最大值
+
+删除最小值
+- 叶子节点
+<img src="images/BST/BST-Dmin-1.png" alt="BST-Dmin-1" style="zoom: 25%;" />
+
+- 非叶子节点
+<img src="images/BST/BST-Dmin-2.png" alt="BST-Dmin-2" style="zoom:25%;" /><img src="images/BST/BST-Dmin-3.png" alt="BST-Dmin-3" style="zoom:25%;" />
+
+```C++
+Node *removeMin(Node *node) {
+  if (node->left == nullptr) {
+    // 包含了node是叶子节点和不是叶子节点两种情况:
+    // 叶子节点返回空(叶子节点的右儿子也为空);非叶子节点,返回右儿子
+    Node *rightNode = node->right;
+    delete node;
+    count--;
+    return rightNode;
+  }
+
+  node->left = removeMin(node->left);
+  return node;
+}
+```
+
+
+
+删除最大值
+
+- 叶子节点
+<img src="images/BST/BST-Dmax-1.png" alt="BST-Dmax-1" style="zoom:25%;" />
+
+- 非叶子节点
+<img src="images/BST/BST-Dmax-2.png" alt="BST-Dmax-2" style="zoom:25%;" /><img src="images/BST/BST-Dmax-3.png" alt="BST-Dmax-3" style="zoom:25%;" />
+
+## 删除任意节点*
+
+对比删除最小值节点和删除最大值节点
+
+- 最小值节点只有右孩子;最大值节点只有左孩子
+
+### 对于只有(左或右)一个孩子的节点的情形
+
+- 删除只有右孩子的节点方法同删除最小值节点的方法
+- 删除只有左孩子的节点方法同删除最大值节点的方法
+
+### 删除有左右两个孩子的节点的情形
+> 1962 - Hubbard Deletion 
+
+以下图的节点`58`举例
+
+
+- 删除`58`与根节点`41`的左孩子无关,因为`41`的右子树必然大于左子树
+<img src="images/BST/BST-D-1.png" alt="BST-D-1" style="zoom: 50%;" />
+
+哪个节点顶替`58`的位置呢?
+- 该节点要满足大于`58`的左孩子,同时又小于`58`的右孩子
+
+- 满足条件的节点:
+  
+
+  
+#### 用`58`右子树的最小值来顶替`58`,例子中是`59`
+
+- 这样就回到了删除一个节点最小值的问题了:
+  
+  - `s = min(d->right)`
+  
+- 将删除了最小值的后的`58`的右子树连接到`s`的右子树上:
+  
+- `s->right = deMin(d->right)`:
+  
+- 将`58`的左子树连接到`s`的左子树上:
+  - `s->left = d ->left`
+<img src="images/BST/BST-D-2.png" alt="BST-D-2" style="zoom:50%;" />
+
+- 删除`d`,`s`是新子树的根,然后返回`s`
+
+```C++
+struct Node {
+  Key key;
+  Value value;
+  Node *left;
+  Node *right;
+
+  Node(Key key, Value value) {
+    this->key = key;
+    this->value = value;
+    this->left = this->right = NULL;
+  }
+
+  // 拷贝赋值构造
+  Node(Node *node) {
+    this->key = node->key;
+    this->value = node->value;
+    this->left = node->left;
+    this->right = node->right;
+  }
+};
+
+Node *remove(Node *node, Key key) {
+  if (node == nullptr)
+    return nullptr;
+
+  if (key == node->key) {
+    if (node->left == nullptr) { // min
+      Node *rightNode = node->right;
+      delete node;
+      count--;
+      return rightNode;
+    }
+
+    if (node->right == nullptr) { // max
+      Node *leftNode = node->left;
+      delete node;
+      count--;
+      return leftNode;
+    }
+
+    // 关键部分
+    Node *successor = minimum(node->right); // 指向node右子树的最小值
+    count++;
+
+    // successor->right = removeMin(node->right),
+    // 若直接这么用有问题removeMin(node->right)后,node->right的值变为未定义/空
+    successor->right = new Node(removeMin(node->right));
+    successor->right = node->left;
+
+    // 关键部分
+
+    delete node;
+    count--;
+
+    return successor;
+  } else if (key < node->key) {
+    node->left = remove(node->left, key);
+    return node;
+  } else {
+    node->right = remove(node->right, key);
+    return node;
+  }
+}
+```
+
+#### 用`58`左子树的最大值来顶替`58`,例子中是`53`
+
+过程类似如上
+<img src="images/BST/BST-D-4.png" alt="BST-D-4" style="zoom: 50%;" />
+
+## 二分搜索树的顺序性[Todo]
+
+- 最小元素和最大元素
+- 前驱和后继
+- `floor`,`ceil`
+  - 若找不到`Key`:
+    - `floor->key < Key < ceil->key`
+    - 也可能没有`floor`,或`ceil`
+  - 若找到`key`:
+    - `floor=ceil=node`
+<img src="images/BST/BST-floor&ceil.png" alt="BST-floor&ceil" style="zoom:50%;" />
+- `rank`,`select`
+  - `rank`:某个键值排第几
+  - `select`:排名第几的元素是什么
+  - 对节点加入新的域,表示以该节点为根的树的节点总数
+- 支持重复元素的二分搜索树
+  - 对节点加入新的域,表示重复节点的个数
+
+## 局限性
+
+- 同样的数据可对应不同的二分搜索树
+- 二分搜索树可能退化成链表
+<img src="images/BST/BST-ShortPoint-1.png" alt="BST-ShortPoint-1" style="zoom:50%;" />
+
+### 改进:使用平衡二叉树
+
+- 左右子树的高度差不超过`1`,从而保证树高为$O(logn)$
+- 平衡二叉树的实现
+  - 红黑树
+  - 2-3 Tree
+  - AVL树
+  - 伸展树(Splay tree)
+
+### `Treap` (Tree + Heap)
+
+### `Trie`
+
+$O(length(key))$
