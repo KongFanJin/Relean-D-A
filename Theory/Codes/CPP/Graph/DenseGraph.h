@@ -2,10 +2,8 @@
 #define DenseGraph_h
 
 #include <cassert>
-#include <iostream>
 #include <vector>
 
-using std::cout;
 using std::vector;
 
 class DenseGraph {
@@ -36,6 +34,7 @@ public:
         assert(v >= 0 && v < n);
         assert(w >= 0 && w < n);
 
+        // 判断是都已存在边
         if(hasEdge(v, w))
             return;
 
