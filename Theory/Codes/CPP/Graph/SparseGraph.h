@@ -51,6 +51,37 @@ public:
     
     return false;
   }
+
+  // 通过制作Iterator访问私有数据
+  class adjIterator{
+    private:
+      SparseGraph &G;
+      int v;
+      int index; // 指示当前迭代的位置
+    public:
+      adjIterator(SparseGraph &graph, int v): G(graph){
+        this->v = v;
+        this->index = 0;
+      }
+
+      int begin(){
+        index = 0;
+        if(G.g[v].size())
+          return G.g[v][index];
+        return -1;
+      }
+
+      int next(){
+        index ++;
+        if(index < G.g[v].size())
+          return G.g[v][index];
+        return -1;
+      }
+
+      bool end(){
+        return index >= G.g[v].size();
+      }
+  };
 };
 
 #endif

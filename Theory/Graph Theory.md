@@ -1,3 +1,6 @@
+- 参考
+  - 算法与数据结构 [C++ ] liubobobo
+
 # Concept
 
 - Vertex
@@ -50,9 +53,12 @@ Simple Graph
   - 每个顶点与其他顶点连接的边少于顶点总数
 <img src="images/Graph/Sparse Graph.png" alt="Sparse Graph" style="zoom:50%;" />
 
-# 遍历临边
+# 遍历临边[Todo]
+
 <img src="images/Graph/Traverse.png" alt="Traverse" style="zoom: 50%;" />
 邻接矩阵`g[v][w]`
 - `g[v][i]`,遍历行
 邻接表
 - `g[v]`,查表即可
+
+> [详见](https://github.com/liuyubobobo/Play-with-Algorithms/tree/master/07-Graph-Basics/Course%20Code%20(C%2B%2B)/03-Vertex%20Adjacent%20Iterator)
