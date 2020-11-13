@@ -62,3 +62,8 @@ Simple Graph
 - `g[v]`,查表即可
 
 > [详见](https://github.com/liuyubobobo/Play-with-Algorithms/tree/master/07-Graph-Basics/Course%20Code%20(C%2B%2B)/03-Vertex%20Adjacent%20Iterator)
+
+## 读取本地文件/封装算法
+
+
+
