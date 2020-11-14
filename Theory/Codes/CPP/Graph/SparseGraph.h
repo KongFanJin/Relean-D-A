@@ -3,8 +3,10 @@
 
 #include <cassert>
 #include <vector>
+#include<iostream>
 
 using std::vector;
+using std::cout;
 
 class SparseGraph {
 private:
@@ -50,6 +52,15 @@ public:
           return true;
     
     return false;
+  }
+
+  void show(){
+    for(int i = 0; i < n; i ++){
+      cout << "Vectex " << i << ":\t";
+      for(int j = 0; j < g[i].size(); j++)
+        cout << g[i][j] <<"  ";
+      cout<<"\n";
+    }
   }
 
   // 通过制作Iterator访问私有数据
