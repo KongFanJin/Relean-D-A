@@ -6,7 +6,11 @@
 
 using namespace std;
 
-// 未理解 1.连通分量的计算 2.深度优先的递归的过程
+/*
+ * 要点 
+ * 1.连通分量的计算
+ * 2.深度优先的递归的过程
+ */
 // 求无权图的联通分量
 template <typename Graph> class Component {
 
@@ -34,7 +38,7 @@ public:
   Component(Graph &graph) : G(graph) {
     // 算法初始化
     visited = new bool[G.V()];
-    id = new int[G.V()];
+    id = new int[G.V()]; // 长度为G.V()
 
     ccount = 0;
     for (int i = 0; i < G.V(); i++) {
@@ -46,7 +50,7 @@ public:
     for (int i = 0; i < G.V(); i++)
       if (!visited[i]) { // 没有被访问过的点
         dfs(i);          // 进行深度优先遍历与i相连接的点
-        ccount++;        // 记录连通分量
+        ccount++;        // 记录连通分量,当遍历一遍时,就是一个连通分量
       }
   }
 

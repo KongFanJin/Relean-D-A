@@ -65,12 +65,11 @@ Simple Graph
 
 ## 读取本地文件/封装算法
 
-# 图的遍历
+# 图的遍历- 深度优先遍历
 
 > [200. Number of Islands](https://leetcode-cn.com/problems/number-of-islands/)
 
-## 深度优先遍历
-> 对比树的深度优先遍历,要记录每个顶点是否被遍历过
+- 对比树的深度优先遍历,要记录每个顶点是否被遍历过
 
 <img src="images/Graph/Graph-DFS-01.png" alt="Graph-DFS-01" style="zoom:50%;" />
 
@@ -95,17 +94,90 @@ Simple Graph
 - 从`5`开始遍历,`0,4,5`均已被遍历过了,退回到`0`
 - 从`0`开始遍历,`1,2,5,6`均已被遍历过了
 
+## 时间复杂度
 
+- 邻接表(稀疏图):$O(V+E)$
+- 邻接矩阵(稠密图):$O(V^2)$
 
-### 连通分量
+## 应用
+
+- 查看有向图中的环
+  - 遍历时,遍历回到自己
+
+# 连通分量
 
 - 一个`图`是由几个小`图`构成的
 <img src="images/Graph/Components.png" alt="Components" style="zoom:50%;" />
 
-> 未理解代码`Components.h`
+[代码]([Play-with-Algorithms/07-Graph-Basics/Course Code (C++)/05-DFS-and-Components at master · liuyubobobo/Play-with-Algorithms (github.com)](https://github.com/liuyubobobo/Play-with-Algorithms/tree/master/07-Graph-Basics/Course Code (C%2B%2B)/05-DFS-and-Components)
 
-### 获得两点之间的路径
+# 获得两点之间的路径
+
 - 深度优先搜寻并不能保证是无权图的最短路径
-- 在遍历时存储路径
+- 在遍历时前置顶点
 
+[代码](https://github.com/liuyubobobo/Play-with-Algorithms/tree/master/07-Graph-Basics/Course%20Code%20(C%2B%2B)/06-Finding-a-Path)
+
+
+
+# 图的遍历- 广度优先遍历
+
+> [200. Number of Islands](https://leetcode-cn.com/problems/number-of-islands/)
+
+- 优先遍历一个顶点的所有相邻顶点,然后遍历相邻顶点的相邻顶点-
+  - 对比树的广度优先遍历
+- 出队队首元素.然后将队首元素的所有邻接顶点入队,重复此过程,直到队列为空
+
+<img src="images/Graph/Graph-BFS-01.png" alt="Graph-BFS-01" style="zoom:50%;" />
+
+- `0`加入队列
+- `0`出队,入队`0`的相邻节点
+  - `q:1,2,5,6`
+  - `out:0`
+- `1`出队,加入`1`的相邻节点,0`已经被遍历过了
+  - `q:2,5,6`
+  - `out:0,1`
+- `2`出队,加入`2`的相邻节点,`0`已经被遍历过了
+  - `q:5,6`
+  - `out:0,1,2`
+- `5`出队,加入`5`的相邻节点,`0`已经被遍历过了
+  - `q:6,3,4`
+  - `out:0,1,2,5`
+- `6`出队,加入`6`的相邻节点,`0`已经被遍历过了,`4`在队列中
+  - `q:3,4`
+  - `out:0,1,2,5,6`
+- `3`出队,加入`3`的相邻节点,`4`在队列中,`5`被遍历过了
+  - `q:4`
+  - `out:0,1,2,5,6,3`
+- `4`出队,加入`4`的相邻节点,`3,5,6`被遍历过了
+  - `q:`
+  - `out:0,1,2,5,6,3,4`
+
+遍历顺序:
+- `0,1,2,5,6,3,4`
+
+距离起始点`0`的(最短)距离,继而求出(无权图)最短路径
+- `0,1,1,1,1,2,2`
+  - `0`:就是`0`顶点
+  - `1`:`0`的相邻顶点
+
+> 最短路径可能不止一条
+
+# 更多无权图算法[Todo]
+
+## `Flood Fill`
+
+## 走迷宫
+
+## 欧拉路径
+
+## 哈密顿路径
+
+## BluePath
+
+## 迷宫生成
+
+## 二分图
+
+## 地图填色问题
 

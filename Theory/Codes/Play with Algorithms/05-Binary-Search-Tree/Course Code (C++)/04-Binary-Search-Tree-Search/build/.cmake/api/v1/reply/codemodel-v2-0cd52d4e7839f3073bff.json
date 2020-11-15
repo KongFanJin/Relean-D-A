@@ -1,0 +1,59 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.5"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "04_Binary_Search_Tree_Search",
+					"targetIndexes" : 
+					[
+						0
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "04_Binary_Search_Tree_Search::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-04_Binary_Search_Tree_Search-Debug-d14045aa048d8ef07b0f.json",
+					"name" : "04_Binary_Search_Tree_Search",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "E:/[Github]/Play with Algorithms/05-Binary-Search-Tree/Course Code (C++)/04-Binary-Search-Tree-Search/build",
+		"source" : "E:/[Github]/Play with Algorithms/05-Binary-Search-Tree/Course Code (C++)/04-Binary-Search-Tree-Search"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 2
+	}
+}
