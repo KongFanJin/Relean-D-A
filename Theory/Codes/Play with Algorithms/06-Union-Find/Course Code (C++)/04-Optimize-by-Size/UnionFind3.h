@@ -64,6 +64,7 @@ namespace UF3{
             if( pRoot == qRoot )
                 return;
 
+            // 优化部分
             // 根据两个元素所在树的元素个数不同判断合并方向
             // 将元素个数少的集合合并到元素个数多的集合上
             if( sz[pRoot] < sz[qRoot] ){

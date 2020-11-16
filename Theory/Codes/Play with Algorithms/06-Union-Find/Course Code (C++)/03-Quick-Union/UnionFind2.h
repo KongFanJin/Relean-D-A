@@ -40,7 +40,7 @@ namespace UF2{
         int find(int p){
             assert( p >= 0 && p < count );
             // 不断去查询自己的父亲节点, 直到到达根节点
-            // 根节点的特点: parent[p] == p
+            // 根节点的特点: parent[p] == p; 自己是自己的爹...
             while( p != parent[p] )
                 p = parent[p];
             return p;
@@ -62,7 +62,7 @@ namespace UF2{
             if( pRoot == qRoot )
                 return;
 
-            parent[pRoot] = qRoot;
+            parent[pRoot] = qRoot; // 合并根
         }
     };
 }
