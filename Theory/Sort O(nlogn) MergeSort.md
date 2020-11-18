@@ -19,6 +19,8 @@
 缺点:
 - 它所需的额外空间和$N$成正比 
 
+## Top-down mergesort (递归向下)
+
 <img src="images/Sort/Merge Sort/01.png" alt="01" style="zoom:50%;" />
 - 归并第3层(从0层开始)
 <img src="images/Sort/Merge Sort/02.png" alt="02" style="zoom:50%;" />
@@ -38,7 +40,7 @@
 - 借助临时/辅助空间
 - 不借助临时/辅助空间
 
-## 借助辅助空间
+### 借助辅助空间
 
 将两个有序序列合并成一个有序序列
 - 通过三个"指针"
@@ -49,13 +51,11 @@
 - `[l, r]`
 <img src="images/Sort/Merge Sort/08.png" alt="05" style="zoom:50%;" />
 
-## Abstract in-place merge
+### 不借助辅助空间
 
 不借助额外存储空间,原地归并
 
 > 待补
-
-## Top-down mergesort
 
 基于原地归并的抽象实现了另一种递归归并，这也是应用高效算法设计中分治思想的最典型 的一个例子 。 这段递归代码是归纳证明算法能够正确地将数组排序的基础 ：如果它能将两个子数组排序，它就能够通过归并两个子数组来将整个数组排序 。  
 
@@ -70,6 +70,30 @@ public:
 ```
 
 
+
+## Down-top mergesort (迭代向上)
+
+<img src="images/Sort/Merge Sort/09.png" alt="09" style="zoom:50%;" />
+
+- 第1轮,2个元素一组
+<img src="images/Sort/Merge Sort/10.png" alt="10" style="zoom:50%;" />
+<img src="images/Sort/Merge Sort/11.png" alt="11" style="zoom:50%;" />
+-  第2轮,4个元素一组
+<img src="images/Sort/Merge Sort/12.png" alt="12" style="zoom:50%;" />
+<img src="images/Sort/Merge Sort/13.png" alt="13" style="zoom:50%;" />
+-  第8轮,8个元素一组
+<img src="images/Sort/Merge Sort/14.png" alt="14" style="zoom:50%;" />
+
+```C++
+// 1, 2, 4, ...
+for (int sz = 1; sz < n; sz += sz)
+    for (int i = 0; i + sz < n; i += sz + sz)
+        // 对arr[i,...,i+sz-1]和arr[i+sz,...,(i+sz+1)+sz]进行归并
+        // min((i+sz+1)+szn-1) 防止(i+sz+1)+sz越界
+        __merge(arr, i, i + sz - 1, min((i+sz+1)+szn-1));
+```
+
+- 没有使用数组的特性,因此可以对链表进行归并排序
 
 # 花花酱的实现
 
