@@ -2,15 +2,18 @@
 
 - Algorithms [Robert Sedgewick Kevin Wayne] 2-1-2
   - https://algs4.cs.princeton.edu/21elementary/Selection.java.html
-- https://leetcode-cn.com/problems/sort-an-array/
+-  [912. 排序数组](https://leetcode-cn.com/problems/sort-an-array/)
 
 # SelectionSort
 
 ## 算法描述
 
-首先，找到数组中最小的那个元素，其次，将它和数组的第一个元素交换位置（如果第一个元素就是最小元素那么它就和自己交换） 。 再次，在剩下的元素中找到最小的元素 ，将它与数组的第二个元素交换位置 。 如此往复，直到将整个数组排序 。  
+- 首先，找到数组中最小的那个元素，
+- 其次，将它和数组的第一个元素交换位置（如果第一个元素就是最小元素那么它就和自己交换） 。 
+- 再次，在剩下的元素中找到最小的元素 ，将它与数组的第二个元素交换位置 。 
+- 如此往复，直到将整个数组排序 。  
 
-选择排序的内循环只是在比较当前元素与目前已知的最小元素（以及将当前索引加 1 和检查是否代码越界），这已经简单到了极点 。 交换元素的代码写在内循环之外，每次交换都能排定一个元素，因此交换的总次数是 N。 所以算法的时间效率取决于比较的次数   
+选择排序的内循环只是在比较当前元素与目前已知的最小元素（以及将当前索引加 1 和检查是否代码越界），这已经简单到了极点 。 交换元素的代码写在内循环之外，每次交换都能排定一个元素，因此交换的总次数是 `N`。 所以算法的时间效率取决于比较的次数   
 
 特点
 
@@ -32,7 +35,7 @@ class Solution1 {
     vector<int> sortArray(vector<int>& nums) {
         for (auto i = 0; i != nums.size(); i++) {  // 选出位置i
             int min = i;
-            for (auto j = i + 1; j != nums.size(); j++) {  // 选出i之后的最小的元素
+            for (auto j = i + 1; j != nums.size(); j++) {  // 选出i之后的最小的元素min
                 if (nums[j] < nums[min]) min = j;
             }
 
@@ -60,6 +63,19 @@ class Solution2 {
     }
 };
 ```
+
+```C++
+// 关键部分
+for (auto i = 0; i != nums.size(); i++) {  // 选出位置i
+    int min = i;
+    for (auto j = i + 1; j != nums.size(); j++) {  // 选出i之后的最小的元素min
+        if (nums[j] < nums[min]) min = j;
+    }
+    swap(nums[i], nums[min]);  // 交换位置,交换后nums[i]就是第i小的元素
+}
+```
+
+
 
 ## 算法分析
 
